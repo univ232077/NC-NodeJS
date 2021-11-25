@@ -13,7 +13,14 @@ function isJsonValid(strToCheck) {
     }
 }
 
-function writeToProductsFile(data) {
+function Product(productID, name, price, imageURL) {
+    this.productID = productID;
+    this.name = name;
+    this.price = price;
+    this.imageURL = imageURL;
+}
+
+async function writeToProductsFile(data) {
     return new Promise(((resolve, reject) => {
         fs.writeFile(PRODUCTS_FILE, data, (err) => {
             if (err) reject(err)
@@ -22,7 +29,7 @@ function writeToProductsFile(data) {
     }))
 }
 
-function getProductsContent() {
+async function getProductsContent() {
     return new Promise(((resolve) => {
         fs.readFile(PRODUCTS_FILE, {encoding: "utf-8"}, async (err, buffer) => {
             if (!err)
@@ -31,13 +38,6 @@ function getProductsContent() {
                 resolve(null);
         })
     }))
-}
-
-function Product(productID, name, price, imageURL) {
-    this.productID = productID;
-    this.name = name;
-    this.price = price;
-    this.imageURL = imageURL;
 }
 
 async function edit() {
