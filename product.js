@@ -123,8 +123,9 @@ async function add() {
 }
 
 async function printAll() {
-    const productsContent = await getProductsContent() || "Нет товаров для прочтения";
-    console.log(productsContent);
+    const productsContent = await getProductsContent();
+    const productsJSON = isJsonValid(productsContent) ? productsContent : [];
+    console.log(productsJSON);
 }
 
 module.exports = {
